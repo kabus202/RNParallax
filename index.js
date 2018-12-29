@@ -251,6 +251,7 @@ class RNParallax extends Component {
             transform: [{ translateY: imageTranslate }, { scale: imageScale }]
           }
         ]}
+        defaultSource={require("../../assets/images/no-record-found.jpg")}
         onLoad={this.handleImageLoaded.bind(this)}
         source={backgroundImage}
       />
