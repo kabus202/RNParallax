@@ -10,6 +10,7 @@ import {
   ImageBackground,
   ActivityIndicator
 } from "react-native";
+import Swiper from "react-native-swiper";
 
 import Colors from "../../constants/Colors";
 
@@ -110,7 +111,7 @@ class RNParallax extends Component {
   componentDidMount() {
     setTimeout(() => {
       this.setTimePassed();
-    }, 6000);
+    }, 1000);
   }
 
   setTimePassed() {
@@ -244,19 +245,53 @@ class RNParallax extends Component {
     const imageScale = this.getImageScale();
 
     return (
-      <Animated.Image
-        style={[
-          styles.backgroundImage,
-          {
-            height: this.getHeaderMaxHeight(),
-            opacity: imageOpacity,
-            transform: [{ translateY: imageTranslate }, { scale: imageScale }]
-          }
-        ]}
-        defaultSource={require("../../assets/images/no-record-found.jpg")}
-        onLoad={this.handleImageLoaded.bind(this)}
-        source={backgroundImage}
-      />
+      <Swiper
+        autoplay={false}
+        autoplayTimeout={4}
+        nextButton={<Text style={styles.buttonText}>›</Text>}
+        prevButton={<Text style={styles.buttonText}>‹</Text>}
+        //autoplay={this.state.autoplay}
+        loop={false}
+        autoplayDirection={true}
+        activeDotColor={"#fff"}
+        style={{ height: this.getHeaderMaxHeight() }}
+        showsButtons
+      >
+        {backgroundImage.map((item, key) => (
+          <Animated.Image
+            key={key}
+            style={[
+              styles.backgroundImage,
+              {
+                height: this.getHeaderMaxHeight(),
+                opacity: imageOpacity,
+                transform: [
+                  { translateY: imageTranslate },
+                  { scale: imageScale }
+                ]
+              }
+            ]}
+            defaultSource={require("../../assets/images/no-record-found.jpg")}
+            // onLoad={this.handleImageLoaded.bind(this)}
+
+            source={{ uri: item }}
+          />
+        ))}
+      </Swiper>
+
+      // <Animated.Image
+      //   style={[
+      //     styles.backgroundImage,
+      //     {
+      //       height: this.getHeaderMaxHeight(),
+      //       opacity: imageOpacity,
+      //       transform: [{ translateY: imageTranslate }, { scale: imageScale }]
+      //     }
+      //   ]}
+      //   defaultSource={require("../../assets/images/no-record-found.jpg")}
+      //   onLoad={this.handleImageLoaded.bind(this)}
+      //   source={backgroundImage}
+      // />
     );
   }
 
