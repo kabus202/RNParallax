@@ -7,7 +7,8 @@ import {
   Text,
   View,
   Dimensions,
-  ImageBackground
+  ImageBackground,
+  ActivityIndicator
 } from "react-native";
 
 const { height: SCREEN_HEIGHT } = Dimensions.get("window");
@@ -74,10 +75,24 @@ const styles = StyleSheet.create({
     width: 120,
     height: 26
   },
+
   headerText: {
     color: DEFAULT_TITLE_COLOR,
     textAlign: "center",
     fontSize: 16
+  },
+
+  loading: {
+    height: 256,
+    backgroundColor: "#FE1F3C",
+    position: "absolute",
+    left: 0,
+    right: 0,
+    top: 0.01,
+    //marginTop, -1,
+    // bottom: 0,
+    alignItems: "center",
+    justifyContent: "center"
   }
 });
 
@@ -262,6 +277,11 @@ class RNParallax extends Component {
     const navBarOpacity = this.getNavBarOpacity();
 
     if (!this.state.timePassed) {
+      return (
+        <View style={styles.loading}>
+          <ActivityIndicator color="#FFF" size="large" />
+        </View>
+      );
     } else {
       return (
         <Animated.View
