@@ -11,6 +11,8 @@ import {
   ActivityIndicator
 } from "react-native";
 
+import Colors from "../../constants/Colors";
+
 const { height: SCREEN_HEIGHT } = Dimensions.get("window");
 
 const IS_IPHONE_X = SCREEN_HEIGHT === 812 || SCREEN_HEIGHT === 896;
@@ -84,7 +86,7 @@ const styles = StyleSheet.create({
 
   loading: {
     height: 256,
-    backgroundColor: "#FE1F3C",
+    backgroundColor: Colors.tintColor,
     position: "absolute",
     left: 0,
     right: 0,
