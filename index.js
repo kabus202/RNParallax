@@ -108,7 +108,7 @@ class RNParallax extends Component {
   componentDidMount() {
     setTimeout(() => {
       this.setTimePassed();
-    }, 1000);
+    }, 6000);
   }
 
   setTimePassed() {
@@ -231,6 +231,10 @@ class RNParallax extends Component {
     );
   }
 
+  handleImageLoaded() {
+    this.setTimePassed();
+  }
+
   renderBackgroundImage() {
     const { backgroundImage } = this.props;
     const imageOpacity = this.getImageOpacity();
@@ -247,6 +251,7 @@ class RNParallax extends Component {
             transform: [{ translateY: imageTranslate }, { scale: imageScale }]
           }
         ]}
+        onLoad={this.handleImageLoaded.bind(this)}
         source={backgroundImage}
       />
     );
